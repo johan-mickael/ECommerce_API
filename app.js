@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const productRoutes = require('./src/routers/product.router');
+const cartRoutes = require('./src/routers/cart.router');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,5 +26,6 @@ app.use(express.json());
 
 // Routes
 app.use('/api/products', productRoutes);
+app.use('/api/carts', cartRoutes);
 
 module.exports = app;

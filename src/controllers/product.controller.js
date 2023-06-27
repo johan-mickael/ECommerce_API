@@ -7,7 +7,7 @@ class ProductController {
     try {
       const { search, page, limit } = req.query;
       const pageNumber = page ? parseInt(page) : 1;
-      const pageSize = limit ? parseInt(limit) : 5;
+      const pageSize = limit ? parseInt(limit) : 4;
       const products = await productService.getAllProducts(search, pageNumber, pageSize);
       res.json(products);
     } catch (error) {
