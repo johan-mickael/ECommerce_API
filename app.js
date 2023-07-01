@@ -1,11 +1,13 @@
+require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const productRoutes = require('./src/routers/product.router');
 const cartRoutes = require('./src/routers/cart.router');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const DB_URI = 'mongodb://localhost:27017/amazonclone';
+const DB_URI = process.env.MONGODB_URI;
 
 // Connect to MongoDB
 mongoose.connect(DB_URI, {
@@ -23,6 +25,7 @@ mongoose.connect(DB_URI, {
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use('/api/products', productRoutes);

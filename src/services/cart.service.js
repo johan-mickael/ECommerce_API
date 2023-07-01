@@ -26,7 +26,9 @@ class CartService {
         cart.quantity = cart.quantity + data.quantity;
         return await cart.save();
       }
-      return await Cart.create(data);
+      if (data.quantity > 0) return await Cart.create(data);
+
+      return null;
     } catch (error) {
       console.log(error);
       throw error;
@@ -68,7 +70,7 @@ class CartService {
       cart.quantity = data.quantity;
       if (cart.quantity <= 0) {
         console.log(id);
-        return await Cart.deleteOne({_id: new ObjectId(id)});
+        return await Cart.deleteOne({ _id: new ObjectId(id) });
       }
       return await cart.save();
     }
