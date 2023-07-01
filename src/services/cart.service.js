@@ -1,6 +1,7 @@
 const { ObjectId } = require("mongodb");
 const Cart = require("../models/cart.model");
 const ProductService = require("./product.service");
+const { get } = require("mongoose");
 
 const productService = new ProductService();
 
@@ -51,17 +52,18 @@ class CartService {
     return await Cart.findByIdAndRemove(id);
   }
 
-  async countCart() {
-    return await Cart.countDocuments();
-  }
-
-  async countCartItem() {
-    var carts = await Cart.find();
+  async getCartsSum() {
+    var carts = await this.getAllCarts();
     var total = 0;
+    var totalPrice = 0;
     carts.forEach((cart) => {
       total += cart.quantity;
+      totalPrice += cart.quantity * cart.item.price;
     });
-    return total;
+    return {
+      count: total,
+      price: totalPrice,
+    };
   }
 
   async updateCartItem(id, data) {
@@ -69,7 +71,6 @@ class CartService {
     if (cart) {
       cart.quantity = data.quantity;
       if (cart.quantity <= 0) {
-        console.log(id);
         return await Cart.deleteOne({ _id: new ObjectId(id) });
       }
       return await cart.save();

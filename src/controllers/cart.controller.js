@@ -35,10 +35,7 @@ class CartController {
 
   async updateCart(req, res) {
     try {
-      const Cart = await cartService.updateCart(
-        req.params.id,
-        req.body
-      );
+      const Cart = await cartService.updateCart(req.params.id, req.body);
       if (!Cart) {
         return res.status(404).json({ error: "Cart not found" });
       }
@@ -69,9 +66,9 @@ class CartController {
     }
   }
 
-  async countCart(req, res) {
+  async getCartsSum(req, res) {
     try {
-      const Cart = await cartService.countCart(req.body);
+      const Cart = await cartService.getCartsSum();
       res.json(Cart);
     } catch (error) {
       res.status(500).json({ error: "Server error" });
@@ -79,9 +76,9 @@ class CartController {
     }
   }
 
-  async countCartItem(req, res) {
+  async calculateTotalPrice(req, res) {
     try {
-      const Cart = await cartService.countCartItem(req.body);
+      const Cart = await cartService.calculateTotalPrice();
       res.json(Cart);
     } catch (error) {
       res.status(500).json({ error: "Server error" });

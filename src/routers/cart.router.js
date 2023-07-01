@@ -5,8 +5,7 @@ const CartController = require("../controllers/cart.controller");
 const cartController = new CartController();
 
 router.get("/", cartController.getAllCarts);
-router.get("/count", cartController.countCart);
-router.get("/count/item", cartController.countCartItem);
+router.get("/sum", cartController.getCartsSum);
 router.post("/remove/item/:id", cartController.updateCartItem);
 router.get("/:id", cartController.getCartById);
 router.post("/", cartController.saveCart);
