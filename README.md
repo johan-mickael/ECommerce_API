@@ -2,7 +2,9 @@
 
 ❌ **It's a non production-ready repository.**
 
-### Features
+---
+
+### Features :
 - Using an hosted mongodb database
 - Public API available for:
     - ✅ Products CRUD
